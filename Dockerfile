@@ -20,6 +20,9 @@ ENV \
     
 COPY ./files/${ORACLE_XE_RPM} /tmp/
 
+# Set timezone to UTC
+RUN ln -snf /usr/share/zoneinfo/UTC /etc/localtime && echo UTC > /etc/timezone
+
 RUN yum install -y oracle-database-preinstall-18c && \
   yum install -y /tmp/${ORACLE_XE_RPM} && \
   rm -rf /tmp/${ORACLE_XE_RPM}
